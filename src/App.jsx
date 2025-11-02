@@ -11,6 +11,8 @@ import {
   Building2,
 } from "lucide-react";
 
+// ======================== COMPONENTS ========================
+
 function Pill({ children }) {
   return (
     <span className="inline-flex items-center gap-1 rounded-full border border-emerald-300/30 bg-emerald-400/10 px-3 py-1 text-xs text-emerald-200">
@@ -60,23 +62,27 @@ function ProductCard({ title, desc, price, badge, cta }) {
   );
 }
 
+// ======================== MAIN PAGE ========================
+
 export default function EcoFlowLanding() {
   return (
     <div className="min-h-screen w-full bg-slate-900 text-slate-100">
-      {/* ======================== NAV ======================== */}
-      <header className="sticky top-0 z-50 backdrop-blur-md bg-slate-900/70 border-b border-white/10">
-        <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
-          {/* NEW LOGO */}
-          <div className="flex items-center gap-3">
+      {/* ======================== HEADER ======================== */}
+      <header className="sticky top-0 z-50 backdrop-blur-md bg-slate-900/80 border-b border-white/10 shadow-md">
+        <div className="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
+          {/* === LOGO + TITLE === */}
+          <div className="flex items-center gap-4">
             <img
               src="/ecoflow-logo.png"
               alt="EcoFlow AI Logo"
-              className="h-12 w-auto"
+              className="h-20 w-auto object-contain drop-shadow-lg"
             />
-            <span className="text-xl font-semibold text-white">EcoFlow AI</span>
+            <h1 className="text-3xl md:text-5xl font-extrabold text-white tracking-wide">
+              EcoFlow <span className="text-green-400">AI</span>
+            </h1>
           </div>
 
-          {/* NAV LINKS */}
+          {/* === NAV LINKS === */}
           <nav className="hidden md:flex items-center gap-6 text-sm text-slate-200">
             <a href="#products" className="hover:text-white">Products</a>
             <a href="#courses" className="hover:text-white">Courses</a>
@@ -84,9 +90,11 @@ export default function EcoFlowLanding() {
             <a href="#consulting" className="hover:text-white">Consulting</a>
             <a href="#contact" className="hover:text-white">Contact</a>
           </nav>
+
+          {/* === WAITLIST BUTTON === */}
           <a
             href="#waitlist"
-            className="rounded-xl bg-white text-slate-900 text-sm px-4 py-2 font-semibold"
+            className="rounded-xl bg-white text-slate-900 text-sm px-4 py-2 font-semibold hover:bg-emerald-400 hover:text-slate-900 transition"
           >
             Join Waitlist
           </a>
@@ -227,9 +235,6 @@ export default function EcoFlowLanding() {
           />
         </div>
       </section>
-
-      {/* ======================== PRODUCTS, COURSES, ETC. ======================== */}
-      {/* (Keep your existing Products, Courses, Research, Consulting, Footer sections here as before) */}
     </div>
   );
 }
