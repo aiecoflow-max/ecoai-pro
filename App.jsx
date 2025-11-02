@@ -1,25 +1,32 @@
-{/* Features */}
-<section className="mx-auto max-w-6xl px-4 py-16">
-  <div className="grid md:grid-cols-4 gap-4">
-    <Feature
-      icon={Leaf}
-      title="Sustainable by Default"
-      desc="초기 설계에서 자동으로 저탄소 옵션을 추천합니다."
-    />
-    <Feature
-      icon={LineChart}
-      title="Real-time LCA"
-      desc="자재·구조·외피별 kgCO₂e를 즉시 비교."
-    />
-    <Feature
-      icon={Layers}
-      title="BIM-Ready"
-      desc="Revit/IFC 데이터와 호환되는 워크플로우."
-    />
-    <Feature
-      icon={Globe2}
-      title="Global Materials DB"
-      desc="지역별 재료 특성과 공급망을 반영."
-    />
+<header className="sticky top-0 z-50 backdrop-blur-md bg-slate-900/80 border-b border-white/10 shadow-md">
+  <div className="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
+    {/* LOGO + TITLE */}
+    <div className="flex items-center gap-4">
+      <img
+        src="/ecoflow-logo.png"
+        alt="EcoFlow AI Logo"
+        className="h-20 w-auto object-contain mix-blend-screen"
+      />
+      <h1 className="text-4xl md:text-5xl font-bold font-sans text-white tracking-tight leading-none">
+        EcoFlow <span className="text-emerald-400">AI</span>
+      </h1>
+    </div>
+
+    {/* NAV LINKS */}
+    <nav className="hidden md:flex items-center gap-6 text-sm text-slate-200">
+      <a href="#products" className="hover:text-white">Products</a>
+      <a href="#courses" className="hover:text-white">Courses</a>
+      <a href="#research" className="hover:text-white">Research</a>
+      <a href="#consulting" className="hover:text-white">Consulting</a>
+      <a href="#contact" className="hover:text-white">Contact</a>
+    </nav>
+
+    {/* CTA */}
+    <a
+      href="#waitlist"
+      className="rounded-xl bg-white text-slate-900 text-sm px-4 py-2 font-semibold hover:bg-emerald-400 hover:text-slate-900 transition"
+    >
+      Join Waitlist
+    </a>
   </div>
-</section>
+</header>
