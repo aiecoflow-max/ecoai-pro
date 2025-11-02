@@ -3,3 +3,7 @@
 @tailwind utilities;
 
 body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial, sans-serif; }
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
