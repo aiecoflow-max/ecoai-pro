@@ -7,10 +7,13 @@
         alt="EcoFlow AI Logo"
         className="h-20 w-auto object-contain mix-blend-screen"
       />
-      <h1 className="text-4xl md:text-5xl font-bold font-sans text-white tracking-tight leading-none">
-        EcoFlow <span className="text-emerald-400">AI</span>
-      </h1>
-    </div>
+      <h1
+  className="text-4xl md:text-5xl font-bold text-white tracking-tight leading-none"
+  style={{ fontFamily: "'Montserrat', sans-serif" }}
+>
+  EcoFlow <span className="text-emerald-400">AI</span>
+</h1>
+
 
     {/* NAV LINKS */}
     <nav className="hidden md:flex items-center gap-6 text-sm text-slate-200">
