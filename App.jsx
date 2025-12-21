@@ -260,7 +260,8 @@ export default function EcoFlowLanding() {
           </div>
         </div>
         <div className="text-xs text-slate-400 text-center pb-8">
-          © {new Date().getFullYear()} AI EcoFlow. All rights reserved.
+          © {new Date().getFullYear()} EcoFlow AI
+. All rights reserved.
         </div>
       </footer>
     </div>
