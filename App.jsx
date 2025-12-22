@@ -1,5 +1,5 @@
-importimport데이터센터
 import React from "react";
+
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -11,6 +11,9 @@ import {
   Database,
   Building2,
 } from "lucide-react";
+import { useEffect, useState } from "react";
+import { DEFAULT_LANG, I18N } from "./i18n";
+
 
 /* ------- Small UI helpers ------- */
 function Pill({ children }) {
@@ -104,9 +107,11 @@ export default function EcoFlowLanding() {
                 Design smarter. Build greener. <span className="text-emerald-300">With AI.</span>
               </motion.h2>
               <p className="mt-4 text-slate-300 leading-relaxed">
-                EcoFlow AI는 초기 설계 단계에서 <span className="text-white font-medium">탄소·에너지·자재</span>를 실시간으로 비교하고,
-                최적 설계를 제안하는 <span className="text-white font-medium">AI 기반 지속가능 디자인 플랫폼</span>입니다.
-              </p>
+  EcoFlow AI is a self-serve platform that helps architects, developers, and project teams
+  compare <span className="text-white font-medium">carbon, energy, and material</span> options
+  in early design—so better decisions are made before cost and risk are locked in.
+</p>
+
               <div className="mt-6 flex items-center gap-3">
                 <CTA>Try LCA Sheet (Free Preview)</CTA>
                 <button className="rounded-2xl border border-white/15 px-5 py-3 text-slate-200 hover:bg-white/5">View Demo</button>
@@ -146,10 +151,27 @@ export default function EcoFlowLanding() {
       {/* ===== FEATURES ===== */}
       <section className="mx-auto max-w-6xl px-4 py-16">
         <div className="grid md:grid-cols-4 gap-4">
-          <Feature icon={Leaf} title="Sustainable by Default" desc="초기 설계에서 자동으로 저탄소 옵션을 추천합니다." />
-          <Feature icon={LineChart} title="Real-time LCA" desc="자재·구조·외피별 kgCO₂e를 즉시 비교." />
-          <Feature icon={Layers} title="BIM-Ready" desc="Revit/IFC와 호환되는 워크플로우." />
-          <Feature icon={Globe2} title="Global Materials DB" desc="지역별 소재 특성과 공급망을 반영." />
+          <Feature
+  icon={Leaf}
+  title="Sustainable by Default"
+  desc="Lower-carbon options are recommended automatically from the earliest design stages."
+/>
+<Feature
+  icon={LineChart}
+  title="Real-time LCA"
+  desc="Instant kgCO2e comparisons across materials, structure, and envelope systems."
+/>
+<Feature
+  icon={Layers}
+  title="BIM-Ready"
+  desc="Designed to align with Revit- and IFC-based workflows."
+/>
+<Feature
+  icon={Globe2}
+  title="Global Materials DB"
+  desc="Material data reflects regional supply chains and environmental factors."
+/>
+
         </div>
       </section>
 
