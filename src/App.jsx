@@ -1,4 +1,5 @@
 import React from "react";
+
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -10,6 +11,9 @@ import {
   Database,
   Building2,
 } from "lucide-react";
+import { useEffect, useState } from "react";
+import { DEFAULT_LANG, I18N } from "./i18n";
+
 
 // ======================== COMPONENTS ========================
 
@@ -65,7 +69,24 @@ function ProductCard({ title, desc, price, badge, cta }) {
 // ======================== MAIN PAGE ========================
 
 export default function EcoFlowLanding() {
-  return (
+    const [lang, setLang] = useState(DEFAULT_LANG);
+  const t = I18N[lang];
+
+    // Load saved language (if any) on first render
+  useEffect(() => {
+    const saved = localStorage.getItem("lang");
+    if (saved === "en" || saved === "ko") {
+      setLang(saved);
+    }
+  }, []);
+
+  // Save language whenever it changes
+  useEffect(() => {
+    localStorage.setItem("lang", lang);
+  }, [lang]);
+
+return (
+    
     <div className="min-h-screen w-full bg-slate-900 text-slate-100">
       {/* ======================== HEADER ======================== */}
       <header className="sticky top-0 z-50 backdrop-blur-md bg-slate-900/80 border-b border-white/10 shadow-md">
@@ -84,12 +105,42 @@ export default function EcoFlowLanding() {
 
           {/* === NAV LINKS === */}
           <nav className="hidden md:flex items-center gap-6 text-sm text-slate-200">
-            <a href="#products" className="hover:text-white">Products</a>
-            <a href="#courses" className="hover:text-white">Courses</a>
-            <a href="#research" className="hover:text-white">Research</a>
-            <a href="#consulting" className="hover:text-white">Consulting</a>
-            <a href="#contact" className="hover:text-white">Contact</a>
+            <a href="#products" className="hover:text-white">
+  {t.nav.products}
+</a>
+
+           <a href="#courses" className="hover:text-white">
+  {t.nav.courses}
+</a>
+
+           <a href="#research" className="hover:text-white">
+  {t.nav.research}
+</a>
+
+            
           </nav>
+          {/* === LANGUAGE TOGGLE === */}
+<div className="flex items-center gap-2 text-sm">
+  <button
+    type="button"
+    onClick={() => setLang("en")}
+    className={`rounded-md px-3 py-1 ${
+      lang === "en" ? "bg-white/10 text-white" : "text-slate-300 hover:text-white"
+    }`}
+  >
+    EN
+  </button>
+  <button
+    type="button"
+    onClick={() => setLang("ko")}
+    className={`rounded-md px-3 py-1 ${
+      lang === "ko" ? "bg-white/10 text-white" : "text-slate-300 hover:text-white"
+    }`}
+  >
+    KR
+  </button>
+</div>
+
 
           {/* === WAITLIST BUTTON === */}
           <a
@@ -107,42 +158,40 @@ export default function EcoFlowLanding() {
         <div className="mx-auto max-w-6xl px-4 py-20 md:py-28">
           <div className="grid md:grid-cols-2 gap-10 items-center">
             <div>
-              <Pill>AI Shapes the Future of Sustainable Architecture</Pill>
+              <Pill>{t.hero.pill}</Pill>
+
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
                 className="mt-4 text-4xl md:text-5xl font-semibold tracking-tight text-white"
               >
-                Design smarter. Build greener.{" "}
-                <span className="text-emerald-300">With AI.</span>
+                {t.hero.titleA}{" "}
+<span className="text-emerald-300">{t.hero.titleB}</span>
+
               </motion.h1>
               <p className="mt-4 text-slate-300 leading-relaxed">
-                EcoFlow AI는 초기 설계 단계에서{" "}
-                <span className="text-white font-medium">
-                  탄소·에너지·자재
-                </span>
-                를 실시간으로 비교하고, 최적 설계를 제안하는{" "}
-                <span className="text-white font-medium">
-                  AI 기반 지속가능 디자인 플랫폼
-                </span>
-                입니다.
-              </p>
+  {t.hero.body}
+</p>
+
               <div className="mt-6 flex items-center gap-3">
-                <CTA>Try LCA Sheet (Free Preview)</CTA>
+                <CTA>{t.hero.ctaPrimary}</CTA>
                 <button className="rounded-2xl border border-white/15 px-5 py-3 text-slate-200 hover:bg-white/5">
-                  View Demo
+                  {t.hero.ctaSecondary}
                 </button>
               </div>
               <div className="mt-6 flex items-center gap-6 text-xs text-slate-400">
                 <span className="inline-flex items-center gap-1">
-                  <Globe2 className="h-4 w-4" /> Global
+  <Globe2 className="h-4 w-4" /> {t.hero.tagGlobal}
+</span>
+
+                <span className="inline-flex items-center gap-1">
+                  <Database className="h-4 w-4" /> {t.hero.tagDb}
+
                 </span>
                 <span className="inline-flex items-center gap-1">
-                  <Database className="h-4 w-4" /> Material CO₂ DB
-                </span>
-                <span className="inline-flex items-center gap-1">
-                  <Building2 className="h-4 w-4" /> Data Center · Housing
+                  <Building2 className="h-4 w-4" /> {t.hero.tagSectors}
+
                 </span>
               </div>
             </div>
