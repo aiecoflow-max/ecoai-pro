@@ -7,7 +7,13 @@ export const I18N = {
       courses: "Courses",
       research: "Research",
     },
-    hero: {
+    hero:demo: {
+  label: "Prompt → Recommendation",
+  prompt: "“Compare low-carbon concrete vs CLT for a data center façade.”",
+  result:
+    "▶ Result: A CLT envelope + recycled aluminum louvers reduces CO2e by 28%.",
+},
+ {
       pill: "AI shapes the future of sustainable architecture",
       titleA: "Design smarter. Build greener.",
       titleB: "With AI.",
@@ -21,7 +27,12 @@ export const I18N = {
     },
   },
 
-  ko: {
+  ko:demo: {
+  label: "프롬프트 → 추천",
+  prompt: "“데이터센터 외벽을 저탄소 콘크리트 vs CLT로 비교해줘.”",
+  result: "▶ 결과: CLT 외피 + 리사이클 알루미늄 루버 조합이 28% 낮은 CO2e",
+},
+ {
     nav: {
       products: "제품",
       courses: "코스",

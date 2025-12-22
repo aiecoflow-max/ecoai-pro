@@ -1,3 +1,4 @@
+importimport데이터센터
 import React from "react";
 import { motion } from "framer-motion";
 import {
@@ -131,9 +132,10 @@ export default function EcoFlowLanding() {
                   <div className="rounded-xl bg-white/5 p-3"><div className="text-emerald-300 text-sm font-semibold">×10</div><div className="text-[10px] text-slate-300">Faster Decisions</div></div>
                 </div>
                 <div className="mt-4 rounded-2xl bg-slate-950/60 border border-white/10 p-4">
-                  <div className="text-xs text-slate-300">Prompt → Recommendation</div>
-                  <div className="mt-2 text-sm text-white/90 font-mono">“데이터센터 외벽을 저탄소 콘크리트 vs CLT로 비교해줘.”</div>
-                  <div className="mt-3 text-xs text-emerald-200/90">▶ Result: CLT 외피 + 재생 알루미늄 루버가 28% 낮은 CO₂e</div>
+                  <div className="text-xs text-slate-300">{t.demo.label}</div>
+                  <div className="mt-2 text-sm text-white/90 font-mono">“{t.demo.prompt}.”</div>
+                  <div className="mt-3 text-xs text-emerald-200/90">▶ Result: {t.demo.result}
+
                 </div>
               </div>
             </motion.div>
