@@ -56,7 +56,16 @@ function Nav() {
     <header className="site-header">
       <div className="container nav-shell">
         <a href="#top" className="brand" aria-label="EcoFlow home">
-          <span className="brand-ecoflow">EcoFlow</span>
+         <span
+  className="brand-ecoflow"
+  style={{
+    fontSize: "1.35rem",
+    lineHeight: "1",
+    fontFamily: "SUSE, sans-serif"
+  }}
+>
+  EcoFlow
+</span>
         </a>
 
         <nav className="main-nav" aria-label="Primary">
