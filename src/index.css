@@ -61,12 +61,11 @@ a {
 }
 
 .brand-ecoflow {
-  font-family: "SUSE", sans-serif;
-  font-size: 1.15rem;
+  font-family: "Lato", sans-serif;
+  font-size: 0.95rem !important;
   font-weight: 600;
   letter-spacing: -0.02em;
-  opacity: 0.95
-  color: #f7f9ff;
+  line-height: 1;
 }
 
 .main-nav {
