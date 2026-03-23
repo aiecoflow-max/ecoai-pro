@@ -1,378 +1,501 @@
-import React, { Suspense, useMemo, useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, MeshDistortMaterial, Environment } from "@react-three/drei";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-function Orb() {
-  const meshRef = useRef();
-
-  useFrame((state) => {
-    const t = state.clock.elapsedTime;
-    if (!meshRef.current) return;
-    meshRef.current.rotation.x = Math.sin(t * 0.25) * 0.18;
-    meshRef.current.rotation.y += 0.0035;
-    meshRef.current.position.y = Math.sin(t * 0.7) * 0.08;
-  });
-
-  return (
-    <Float speed={1.4} rotationIntensity={0.4} floatIntensity={0.7}>
-      <mesh ref={meshRef} scale={2.05}>
-        <icosahedronGeometry args={[1, 48]} />
-        <MeshDistortMaterial
-          distort={0.28}
-          speed={1.6}
-          roughness={0.12}
-          metalness={0.65}
-          clearcoat={1}
-          clearcoatRoughness={0.08}
-          transmission={0.08}
-          thickness={1.4}
-          color="#7c5cff"
-        />
-      </mesh>
-    </Float>
-  );
+@font-face {
+  font-family: "Lato";
+  src: url("/Lato-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
-function OrbScene() {
-  return (
-    <div className="orb-wrap" aria-hidden="true">
-      <Canvas camera={{ position: [0, 0, 4.8], fov: 42 }}>
-        <ambientLight intensity={0.8} />
-        <directionalLight position={[4, 3, 3]} intensity={2.2} />
-        <pointLight position={[-3, -2, 2]} intensity={1.3} />
-        <Suspense fallback={null}>
-          <Environment preset="city" />
-          <Orb />
-        </Suspense>
-      </Canvas>
-      <div className="orb-glow orb-glow-1" />
-      <div className="orb-glow orb-glow-2" />
-    </div>
-  );
+:root {
+  --bg-1: #07111f;
+  --bg-2: #0f1630;
+  --bg-3: #1f1550;
+  --text: #eef3ff;
+  --muted: rgba(238, 243, 255, 0.72);
+  --line: rgba(255, 255, 255, 0.08);
+  --card: rgba(255, 255, 255, 0.05);
+  --card-strong: rgba(255, 255, 255, 0.08);
+  --shadow: 0 20px 70px rgba(0, 0, 0, 0.34);
+  --radius: 24px;
+  --container: 1240px;
 }
 
-function Nav() {
-  return (
-    <header className="site-header">
-      <div className="container nav-shell">
-        <a href="#top" className="brand" aria-label="EcoFlow home">
-          <span className="brand-ecoflow">EcoFlow</span>
-        </a>
-
-        <nav className="main-nav" aria-label="Primary">
-          <a href="#what-it-does">What it does</a>
-          <a href="#calculator">Live Calculator</a>
-          <a href="#benefits">Benefits</a>
-          <a href="#pricing">Pricing</a>
-          <a href="#insights">Insights</a>
-          <a href="#contact">Contact</a>
-        </nav>
-
-        <div className="nav-actions">
-          <a href="#login" className="login-link">
-            Login
-          </a>
-        </div>
-      </div>
-    </header>
-  );
+* {
+  box-sizing: border-box;
 }
 
-function Hero() {
-  return (
-    <section className="hero-section" id="top">
-      <div className="container hero-grid">
-        <div className="hero-copy">
-          <div className="eyebrow">
-            Early-stage decision intelligence for capital projects
-          </div>
-
-          <h1 className="hero-title">
-            Quantify cost, carbon, and certification risk before design begins.
-          </h1>
-
-          <p className="hero-subtitle">
-            EcoFlow helps owners, developers, and project teams evaluate early
-            building scenarios with sharper commercial logic before assumptions
-            become expensive.
-          </p>
-
-          <div className="hero-cta-row">
-            <a href="#calculator" className="btn btn-primary">
-              Try Live Calculator
-            </a>
-            <a href="#pricing" className="btn btn-secondary">
-              View Pricing
-            </a>
-          </div>
-
-          <div className="hero-meta">
-            <span>Cost range</span>
-            <span>Embodied carbon range</span>
-            <span>LEED impact</span>
-            <span>Decision summary</span>
-          </div>
-        </div>
-
-        <div className="hero-visual">
-          <OrbScene />
-        </div>
-      </div>
-    </section>
-  );
+html {
+  scroll-behavior: smooth;
 }
 
-function Section({ id, label, title, text, children }) {
-  return (
-    <section id={id} className="content-section">
-      <div className="container">
-        <div className="section-intro">
-          <div className="section-label">{label}</div>
-          <h2>{title}</h2>
-          {text && <p>{text}</p>}
-        </div>
-        {children}
-      </div>
-    </section>
-  );
+body {
+  margin: 0;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 20% 15%, rgba(78, 114, 255, 0.22), transparent 26%),
+    radial-gradient(circle at 82% 18%, rgba(145, 77, 255, 0.18), transparent 22%),
+    linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 42%, var(--bg-3) 100%);
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  min-height: 100vh;
 }
 
-function WhatItDoes() {
-  return (
-    <Section
-      id="what-it-does"
-      label="What it does"
-      title="A decision-validation layer before design begins"
-      text="EcoFlow is not a design tool. It helps teams compare early options through structured scenario logic, cost/carbon signals, and certification-aware tradeoff review."
-    >
-      <div className="cards three">
-        <div className="glass-card">
-          <h3>Scenario input</h3>
-          <p>Program type, geography, building intent, and system-level assumptions.</p>
-        </div>
-        <div className="glass-card">
-          <h3>Quantified output</h3>
-          <p>Cost range, embodied carbon range, LEED impact, and baseline comparison.</p>
-        </div>
-        <div className="glass-card">
-          <h3>Decision signal</h3>
-          <p>A sharper summary of what is likely viable before full design spend begins.</p>
-        </div>
-      </div>
-    </Section>
-  );
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-function CalculatorPreview() {
-  return (
-    <Section
-      id="calculator"
-      label="Live Calculator"
-      title="Fast scenario preview"
-      text="This section is styled as a wide premium block so you can drop your working calculator directly underneath the hero."
-    >
-      <div className="calculator-shell">
-        <div className="calculator-toolbar">
-          <span>Free version preview</span>
-          <span>Tier 2 and Tier 3 include more detailed options</span>
-        </div>
-
-        <div className="calculator-grid">
-          <div className="field">
-            <label>Project type</label>
-            <select>
-              <option>Office</option>
-              <option>Commercial</option>
-              <option>Mixed-use</option>
-              <option>Hospitality</option>
-            </select>
-          </div>
-
-          <div className="field">
-            <label>Geography</label>
-            <select>
-              <option>North America</option>
-              <option>South America</option>
-              <option>Europe</option>
-              <option>Middle East</option>
-              <option>Asia</option>
-              <option>Africa</option>
-              <option>Oceania</option>
-            </select>
-          </div>
-
-          <div className="field">
-            <label>Subregion</label>
-            <select>
-              <option>US</option>
-              <option>UK</option>
-              <option>UAE</option>
-              <option>Other</option>
-            </select>
-          </div>
-
-          <div className="field">
-            <label>Project size</label>
-            <input type="text" placeholder="e.g. 250,000 SF" />
-          </div>
-        </div>
-
-        <div className="results-preview">
-          <div className="metric-card">
-            <span>Cost range</span>
-            <strong>$185–$235 / SF</strong>
-          </div>
-          <div className="metric-card">
-            <span>Embodied carbon</span>
-            <strong>310–420 kgCO₂e/m²</strong>
-          </div>
-          <div className="metric-card">
-            <span>LEED impact</span>
-            <strong>Moderate opportunity</strong>
-          </div>
-          <div className="metric-card">
-            <span>Decision summary</span>
-            <strong>Viable with targeted optimization</strong>
-          </div>
-        </div>
-      </div>
-    </Section>
-  );
+.container {
+  width: min(var(--container), calc(100% - 48px));
+  margin: 0 auto;
 }
 
-function Benefits() {
-  return (
-    <Section
-      id="benefits"
-      label="Benefits"
-      title="Better decisions before design lock-in"
-      text="The value is not just speed. The value is reducing early ambiguity when budget, carbon, and certification strategy are still fluid."
-    >
-      <div className="cards three">
-        <div className="glass-card">
-          <h3>Reduce expensive early assumptions</h3>
-          <p>See likely scenario implications before deeper consultant and design spend.</p>
-        </div>
-        <div className="glass-card">
-          <h3>Align stakeholders faster</h3>
-          <p>Give owners and teams a structured decision summary instead of vague discussion.</p>
-        </div>
-        <div className="glass-card">
-          <h3>Support premium advisory upsell</h3>
-          <p>Use EcoFlow as the front-end qualification layer for deeper technical review.</p>
-        </div>
-      </div>
-    </Section>
-  );
+/* Header */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  backdrop-filter: blur(18px);
+  background: rgba(7, 17, 31, 0.42);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-function Pricing() {
-  return (
-    <Section
-      id="pricing"
-      label="Pricing"
-      title="Simple entry, higher-value upgrade path"
-      text="Start with lightweight scenario validation, then move into more detailed decision support."
-    >
-      <div className="cards three pricing-cards">
-        <div className="glass-card pricing-card">
-          <div className="price-tier">FREE</div>
-          <div className="price">$0</div>
-          <ul>
-            <li>Preview scenario</li>
-            <li>Basic recommendation</li>
-            <li>No PDF</li>
-          </ul>
-        </div>
-
-        <div className="glass-card pricing-card featured">
-          <div className="price-tier">DECISION</div>
-          <div className="price">$299</div>
-          <ul>
-            <li>Executive summary</li>
-            <li>Project inputs</li>
-            <li>Key metrics</li>
-            <li>Detailed cost breakdown</li>
-            <li>Embodied carbon breakdown</li>
-            <li>Baseline comparison</li>
-            <li>Delivery/risk note</li>
-          </ul>
-        </div>
-
-        <div className="glass-card pricing-card">
-          <div className="price-tier">STRATEGY</div>
-          <div className="price">$499</div>
-          <ul>
-            <li>Everything in Decision</li>
-            <li>More detailed options</li>
-            <li>More scenario depth</li>
-            <li>Stronger decision framing</li>
-            <li>Premium report positioning</li>
-          </ul>
-        </div>
-      </div>
-    </Section>
-  );
+.nav-shell {
+  height: 58px;
+  display: grid;
+  grid-template-columns: 140px 1fr 100px;
+  align-items: center;
+  gap: 14px;
 }
 
-function Insights() {
-  const items = useMemo(
-    () => [
-      "Why early carbon assumptions distort capital planning",
-      "How to position scenario intelligence before schematic design",
-      "What makes a paid decision PDF feel credible"
-    ],
-    []
-  );
-
-  return (
-    <Section
-      id="insights"
-      label="Insights"
-      title="Decision intelligence, not generic content"
-      text="Use this section for articles that make the platform feel credible, specialized, and worth paying for."
-    >
-      <div className="cards three">
-        {items.map((item) => (
-          <div className="glass-card" key={item}>
-            <h3>{item}</h3>
-            <p>
-              Structured insight for developers, owners, and project teams making
-              early-stage decisions.
-            </p>
-          </div>
-        ))}
-      </div>
-    </Section>
-  );
+.brand-ecoflow {
+  font-family: "Lato", sans-serif;
+  font-size: 0.88rem !important;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
 }
 
-function Contact() {
-  return (
-    <Section
-      id="contact"
-      label="Contact"
-      title="Get in touch"
-      text="For platform access, partnerships, or premium advisory inquiries."
-    >
-      <div className="contact-panel">
-        <p>hello@ecoflow-ai.com</p>
-      </div>
-    </Section>
-  );
+.main-nav {
+  display: flex;
+  justify-content: center;
+  gap: 26px;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
-export default function App() {
-  return (
-    <div className="app-shell">
-      <Nav />
-      <Hero />
-      <WhatItDoes />
-      <CalculatorPreview />
-      <Benefits />
-      <Pricing />
-      <Insights />
-      <Contact />
-    </div>
-  );
+.main-nav a,
+.login-link {
+  font-size: 0.81rem;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  color: rgba(239, 243, 255, 0.76);
+  transition: color 0.22s ease, opacity 0.22s ease;
+}
+
+.main-nav a:hover,
+.login-link:hover {
+  color: #ffffff;
+}
+
+.nav-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Hero */
+
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  padding: 52px 0 34px;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: center;
+  gap: 30px;
+  min-height: 700px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(235, 240, 255, 0.8);
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.hero-title {
+  margin: 18px 0 16px;
+  max-width: 11.5ch;
+  font-family: "Raleway", sans-serif;
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  line-height: 0.97;
+  letter-spacing: -0.05em;
+  font-weight: 700;
+}
+
+.hero-subtitle {
+  max-width: 640px;
+  margin: 0;
+  font-size: 1.06rem;
+  line-height: 1.75;
+  color: var(--muted);
+}
+
+.hero-cta-row {
+  display: flex;
+  gap: 14px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  min-height: 50px;
+  padding: 0 20px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.96rem;
+  font-weight: 600;
+  transition: transform 0.22s ease, opacity 0.22s ease, border-color 0.22s ease;
+  border: none;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #7c5cff, #4979ff);
+  color: white;
+  box-shadow: 0 14px 40px rgba(81, 102, 255, 0.28);
+}
+
+.btn-secondary {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: white;
+}
+
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+  margin-top: 26px;
+}
+
+.hero-meta span {
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  color: rgba(239, 244, 255, 0.82);
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Orb */
+
+.hero-visual {
+  position: relative;
+  min-height: 640px;
+}
+
+.orb-wrap {
+  position: relative;
+  width: 100%;
+  height: 640px;
+  border-radius: 34px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 40%, rgba(122, 85, 255, 0.12), transparent 30%),
+    radial-gradient(circle at 65% 55%, rgba(55, 116, 255, 0.15), transparent 34%),
+    rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: var(--shadow);
+}
+
+.orb-wrap canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.orb-glow {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(70px);
+  pointer-events: none;
+}
+
+.orb-glow-1 {
+  width: 180px;
+  height: 180px;
+  left: 8%;
+  top: 10%;
+  background: rgba(61, 124, 255, 0.2);
+}
+
+.orb-glow-2 {
+  width: 220px;
+  height: 220px;
+  right: 6%;
+  bottom: 12%;
+  background: rgba(145, 72, 255, 0.18);
+}
+
+/* Sections */
+
+.content-section {
+  padding: 64px 0;
+}
+
+.section-intro {
+  max-width: 760px;
+  margin-bottom: 28px;
+}
+
+.section-label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(196, 210, 255, 0.78);
+  margin-bottom: 8px;
+}
+
+.section-intro h2 {
+  margin: 0 0 12px;
+  font-size: clamp(2rem, 3.2vw, 3.1rem);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+}
+
+.section-intro p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+.cards {
+  display: grid;
+  gap: 18px;
+}
+
+.cards.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.glass-card {
+  padding: 24px;
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, var(--card-strong), var(--card));
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: var(--shadow);
+}
+
+.glass-card h3 {
+  margin: 0 0 10px;
+  font-size: 1.06rem;
+  letter-spacing: -0.02em;
+}
+
+.glass-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: 0.98rem;
+}
+
+/* Calculator */
+
+.calculator-shell {
+  padding: 22px;
+  border-radius: 30px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: var(--shadow);
+}
+
+.calculator-toolbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  color: rgba(235, 240, 255, 0.74);
+  font-size: 0.86rem;
+  margin-bottom: 18px;
+}
+
+.calculator-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field label {
+  font-size: 0.84rem;
+  color: rgba(236, 241, 255, 0.8);
+}
+
+.field input,
+.field select {
+  height: 52px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(8, 14, 28, 0.65);
+  color: white;
+  padding: 0 14px;
+  outline: none;
+}
+
+.results-preview {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.metric-card {
+  padding: 18px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.metric-card span {
+  display: block;
+  font-size: 0.78rem;
+  color: rgba(231, 237, 255, 0.68);
+  margin-bottom: 8px;
+}
+
+.metric-card strong {
+  font-size: 1.02rem;
+  line-height: 1.35;
+}
+
+/* Pricing */
+
+.pricing-cards .featured {
+  transform: translateY(-6px);
+  border-color: rgba(120, 104, 255, 0.34);
+  box-shadow: 0 24px 80px rgba(85, 99, 255, 0.22);
+}
+
+.price-tier {
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(202, 214, 255, 0.78);
+}
+
+.price {
+  margin: 10px 0 16px;
+  font-size: 2.6rem;
+  line-height: 1;
+  letter-spacing: -0.05em;
+  font-weight: 700;
+}
+
+.pricing-card ul {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--muted);
+  line-height: 1.9;
+}
+
+/* Contact */
+
+.contact-panel {
+  padding: 28px;
+  border-radius: 26px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: var(--shadow);
+}
+
+/* Responsive */
+
+@media (max-width: 1120px) {
+  .hero-grid,
+  .cards.three {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hero-title {
+    max-width: 12ch;
+  }
+
+  .hero-visual {
+    min-height: 520px;
+  }
+
+  .orb-wrap {
+    height: 520px;
+  }
+}
+
+@media (max-width: 820px) {
+  .nav-shell {
+    grid-template-columns: 1fr;
+    height: auto;
+    padding: 16px 0;
+    justify-items: start;
+  }
+
+  .main-nav {
+    justify-content: flex-start;
+    gap: 16px;
+  }
+
+  .nav-actions {
+    justify-content: flex-start;
+  }
+
+  .hero-section {
+    padding-top: 28px;
+  }
+
+  .hero-grid,
+  .cards.three,
+  .calculator-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-grid {
+    min-height: auto;
+  }
+
+  .hero-visual,
+  .orb-wrap {
+    min-height: 420px;
+    height: 420px;
+  }
+
+  .container {
+    width: min(var(--container), calc(100% - 28px));
+  }
+
+  .hero-title {
+    font-size: clamp(2.4rem, 13vw, 4rem);
+  }
 }

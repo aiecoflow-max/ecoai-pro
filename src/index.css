@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 :root {
   --bg-1: #07111f;
   --bg-2: #0f1630;
@@ -489,3 +490,23 @@ a {
     font-size: clamp(2.4rem, 13vw, 4rem);
   }
 }
+=======
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@font-face {
+  font-family: "Lato";
+  src: url("/Lato-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.brand-ecoflow {
+  font-family: "Lato", sans-serif;
+  font-size: 0.95rem !important;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+>>>>>>> 988cab0 (latest app update)
