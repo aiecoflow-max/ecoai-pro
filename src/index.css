@@ -53,16 +53,16 @@ a {
 }
 
 .nav-shell {
-  height: 78px;
+  height: 58px; /* 🔥 smaller, premium */
   display: grid;
-  grid-template-columns: 180px 1fr 120px;
+  grid-template-columns: 140px 1fr 100px;
   align-items: center;
-  gap: 18px;
+  gap: 14px;
 }
 
 .brand-ecoflow {
-  font-family: "Lato", sans-serif;
-  font-size: 0.95rem !important;
+   font-family: "Lato", sans-serif;
+  font-size: 0.88rem !important;  /* 👈 slightly smaller */
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1;
@@ -78,7 +78,7 @@ a {
 
 .main-nav a,
 .login-link {
-  font-size: 0.81rem; /* ~15% smaller, cleaner top-nav rhythm */
+  font-size: 0.78rem; /* ~15% smaller, cleaner top-nav rhythm */
   line-height: 1;
   letter-spacing: 0.01em;
   color: rgba(239, 243, 255, 0.76);
