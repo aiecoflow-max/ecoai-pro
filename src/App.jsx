@@ -56,16 +56,7 @@ function Nav() {
     <header className="site-header">
       <div className="container nav-shell">
         <a href="#top" className="brand" aria-label="EcoFlow home">
-         <span
-  className="brand-ecoflow"
-  style={{
-    fontSize: "1.35rem",
-    lineHeight: "1",
-    fontFamily: "SUSE, sans-serif"
-  }}
->
-  EcoFlow
-</span>
+          <span className="brand-ecoflow">EcoFlow</span>
         </a>
 
         <nav className="main-nav" aria-label="Primary">
@@ -92,15 +83,18 @@ function Hero() {
     <section className="hero-section" id="top">
       <div className="container hero-grid">
         <div className="hero-copy">
-          <div className="eyebrow">Early-stage decision intelligence for capital projects</div>
+          <div className="eyebrow">
+            Early-stage decision intelligence for capital projects
+          </div>
 
           <h1 className="hero-title">
             Quantify cost, carbon, and certification risk before design begins.
           </h1>
 
           <p className="hero-subtitle">
-            EcoFlow helps owners, developers, and project teams evaluate early building
-            scenarios with sharper commercial logic before assumptions become expensive.
+            EcoFlow helps owners, developers, and project teams evaluate early
+            building scenarios with sharper commercial logic before assumptions
+            become expensive.
           </p>
 
           <div className="hero-cta-row">
@@ -342,7 +336,10 @@ function Insights() {
         {items.map((item) => (
           <div className="glass-card" key={item}>
             <h3>{item}</h3>
-            <p>Structured insight for developers, owners, and project teams making early-stage decisions.</p>
+            <p>
+              Structured insight for developers, owners, and project teams making
+              early-stage decisions.
+            </p>
           </div>
         ))}
       </div>
